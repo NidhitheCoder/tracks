@@ -12,12 +12,12 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
     Signup: SignupScreen,
-    Singin: SignInScreen
+    Signin: SignInScreen
   }),
   mainFlow: createBottomTabNavigator({
     trackListFlow: createStackNavigator({
       TrackList: TrackListScreen,
-      Trackdetails: TrackDetailsScreen
+      TrackDetails: TrackDetailsScreen
     }),
     TrackCreate: TrackCreateScreen,
     Account: AccountScreen
