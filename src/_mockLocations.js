@@ -11,8 +11,8 @@ const getLocation = increament => {
             accuracy:5,
             altitudeAccuracy:5,
             altitude:5,
-            longitude:76.257 + increament * tenMetersWithDegrees,
-            latitude: 11.6629 + increament * tenMetersWithDegrees
+            longitude: 76.2589362 + increament * tenMetersWithDegrees,
+            latitude: 11.6614967 + increament * tenMetersWithDegrees
         }
     }
 };
