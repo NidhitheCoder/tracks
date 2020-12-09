@@ -1,50 +1,30 @@
-import '../_mockLocations';
-import React, { useState, useEffect,useContext } from "react";
+import "../_mockLocations";
+import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
-import { SafeAreaView } from "react-navigation";
-import { requestPermissionsAsync,watchPositionAsync,Accuracy} from "expo-location";
-import {Context as LocationContext} from '../context/LocationContext';
+import { SafeAreaView, withNavigationFocus } from "react-navigation";
+import { Context as LocationContext } from "../context/LocationContext";
 import Map from "../components/Map";
+import useLocation from "../hooks/useLocation";
+import TrackForm from "../components/TrackForm";
 
-const TrackCreateScreen = () => {
-  const {addLocation} = useContext(LocationContext);
-  const [err, setErr] = useState(null);
-
-  const startWatching = async () => {
-    try {
-      let response = await requestPermissionsAsync();
-      if(!response.granted){
-        setErr("Not Granded");
-        return ;
-      }
-
-      await watchPositionAsync({
-        accuracy:Accuracy.BestForNavigation,
-        timeInterval:1000,
-        distanceInterval:10
-      },(location)=>{
-        addLocation(location);
-      });
-
-    } catch (err) {
-      setErr(err);
-    }
-  };
-
-  useEffect(() => {
-    startWatching();
-  }, []);
+const TrackCreateScreen = ({ isFocused }) => {
+  const { state, addLocation } = useContext(LocationContext);
+  // const [err] = useLocation((location)=>addLocation(location)); === below line
+  const [err] = useLocation(isFocused, location => {
+    addLocation(location, state.recording);
+  });
 
   return (
     <SafeAreaView forceInset={{ top: "always" }}>
       <Text h2>Create a Track</Text>
       <Map />
       {err ? <Text>Please enable location services</Text> : null}
+      <TrackForm />
     </SafeAreaView>
   );
 };
 
-const styels = StyleSheet.create({});
+const styles = StyleSheet.create({});
 
-export default TrackCreateScreen;
+export default withNavigationFocus(TrackCreateScreen);
