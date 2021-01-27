@@ -7,11 +7,9 @@ import {Context as trackContext} from '../context/TrackContext';
 const TrackListScreen = ({navigation}) => {
 
   const {state,fetchTracks} = useContext(trackContext);
-  console.log(state);
   return (
     <>
     <NavigationEvents onWillFocus={()=>fetchTracks()} />
-      <Text>Track List Screen</Text>
       <FlatList 
       data ={state}
       keyExtractor={item => item._id}
@@ -28,6 +26,10 @@ const TrackListScreen = ({navigation}) => {
     </>
   );
 };
+
+TrackListScreen.navigationOptions ={
+  title:'tracks'
+}
 
 const styles = StyleSheet.create({});
 

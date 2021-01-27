@@ -13,5 +13,5 @@ export default () => {
         navigate('TrackList');
     }
 
-    return [savetrack];
+    return savetrack;
 };
