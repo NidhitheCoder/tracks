@@ -5,7 +5,7 @@ import MapView,{Polyline} from 'react-native-maps';
 
 const TrackDetailScreen = ({navigation}) => {
   const {state} = useContext(TrackContext);
-  const _id = navigation.getParams('_id');
+  const _id = navigation.getParam('_id');
   const track = state.find(t =>t._id === _id);
   const intitalCoords = track.locations[0].coords;
   return (
